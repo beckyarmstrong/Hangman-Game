@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <meta charset="UTF-8">
+  <title>Hangman Game</title>
+
+  <link rel="stylesheet" type="text/css" href="assets\css\reset.css"/>
+  <link rel="stylesheet" type="text/css" href="assets\css\style.css">
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+
+  <script src="https://use.fontawesome.com/ca6de464ee.js"></script>
+  
+</head>
+<body>
+    <div id="white">
+        <img src="assets\images\turkey.png" alt="turkey" class="turkeyImage">
+    </div>
+    <div id="orangebox">
+        <h4>thanksgiving</h4>
+        <h4 class="hangman">hangman</h4>
+    </div>
+    <div class="instructions">
+        <h1>Instructions:</h1>
+        <br/>
+        <h2>1. Guess a Thanksgiving dish!</h2>
+        <br/>
+        <h2>2. Press any key to begin.</h3>
+        <br/>
+        <h3>**Audio is included, enable sound.** </h3>
+    </div>
+    <div class="display">
+        <p class="greywords">Current Word:</p>
+        <br/>
+        <p id="current"></p>
+        <br/>
+        <br/>
+         <p class ="greywords">Number of Guesses Remaining:</p>
+         <br/>
+         <p id="remain"></p>
+         <br>
+         <br/>
+         <p class="greywords">Letters Already Guessed:</p>
+         <p id="guess"></p>
+         <br>
+         <br/>
+         <p class="greywords">Wins:</p>
+         <p id="win"></p>
+         <br>
+         <br/>
+         <p class="greywords">Losses:</p>
+         <p id="loss"></p>
+     </div>
+
+<!-- End of HTML -->
+
+<script type="text/javascript">
+
+// Step 2: create variable of the food words
+var wins = 1;
+var losses = 1;
+var guessRemain = 10;
+var foodWords = [
+ "pie",
+ "turkey",
+ "bacon",
+ "bread",
+ "wine"
+ ];
+var audioW = new Audio('winsound.mp3');
+var audioL = new Audio('losesound.mp3');
+
+function reset() {
+    document.getElementById("guess").innerHTML = "";
+    guessRemain = 10;
+    randomWord = foodWords[Math.floor(Math.random() * foodWords.length)];
+    count = [];
+    for (var i = 0; i < randomWord.length; i++) {
+    count[i] = "_ ";
+     }
+    document.getElementById("current").innerHTML = count;
+    remainingLetters = randomWord.length;
+    console.log("I HAVE " + remainingLetters + " left");
+}
+
+// Step 1: display remaining gueses
+document.getElementById("remain").innerHTML = guessRemain;
+// Step 3: create a variable to pick a random word from that array
+var randomWord = foodWords[Math.floor(Math.random() * foodWords.length)];
+console.log(randomWord);
+//Step 4: make it count the number of letters in that word that you just picked
+var count = [];
+ for (var i = 0; i < randomWord.length; i++) {
+ count[i] = "_ ";
+ }
+//Step 5: write the var on the screen
+document.getElementById("current").innerHTML = count;
+
+//Step 6: have it recognize that there are remaining letters
+var remainingLetters = randomWord.length;
+	console.log("I HAVE " + remainingLetters + " left");
+
+//Step 7: function for when they click a key
+document.onkeyup=function(event) {
+    var userGuess = event.key;
+    document.getElementById("guess").innerHTML += userGuess + " ";
+    // console.log(randomWord.length);
+    if (randomWord.includes(userGuess)) {
+        // console.log("test");
+// Step 7: if this statment is true, then modify the count variable, replace the dash in count with letter, and it has the correct position, and display the letter
+    var guessIndex = randomWord.indexOf(userGuess);
+    //console.log(randomWord.indexOf(userGuess));
+    count[guessIndex] = userGuess
+    //console.log(count);
+    document.getElementById("current").innerHTML = count;
+    remainingLetters--;
+    console.log("I HAVE " + remainingLetters + " left");
+    if (remainingLetters === 0) {
+        document.getElementById("win").innerHTML = wins++;
+        console.log("I have won");
+        audioW.play();
+        reset();
+    }
+}
+// Step 8: if not true, then subtract a guess
+
+    else {
+       document.getElementById("remain").innerHTML = guessRemain--;
+       document.getElementById("remain").innerHTML = guessRemain;
+        if (guessRemain === 0) {
+        document.getElementById("loss").innerHTML = losses++;
+        console.log("I have lost");
+        audioL.play();
+        reset();
+    }
+            }
+}
+        
+ </script>
+</body>
+<div class="footer">
+</div>
+</html>
