@@ -16,13 +16,13 @@
         <img src="assets\images\turkey.png" alt="turkey" class="turkeyImage">
     </div>
     <div id="orangebox">
-        <h4>thanksgiving</h4>
+        <h4>food i ate today</h4>
         <h4 class="hangman">hangman</h4>
     </div>
     <div class="instructions">
         <h1>Instructions:</h1>
         <br/>
-        <h2>1. Guess a Thanksgiving dish!</h2>
+        <h2>1. Guess the foods Becky ate today!</h2>
         <br/>
         <h2>2. Press any key to begin.</h3>
         <br/>
@@ -49,6 +49,7 @@
          <br/>
          <p class="greywords">Losses:</p>
          <p id="loss"></p>
+         <div id="image"></div>
      </div>
 
 <!-- End of HTML -->
@@ -64,10 +65,22 @@ var foodWords = [
  "turkey",
  "bacon",
  "bread",
- "wine"
+ "soup",
+ "orange",
+ "yogurt",
  ];
 var audioW = new Audio('winsound.mp3');
 var audioL = new Audio('losesound.mp3');
+
+// function imageFunction() {
+//     var x = document.createElement("IMG");
+//     x.setAttribute("src", "bacon.png");
+//     x.setAttribute("width", "200");
+//     x.setAttribute("height", "100");
+//     x.setAttribute("alt", "bacon");
+//     x.setAttribute("class", "imageBacon");
+//     document.body.appendChild(x);
+// }
 
 function reset() {
     document.getElementById("guess").innerHTML = "";
@@ -116,7 +129,10 @@ document.onkeyup=function(event) {
     console.log("I HAVE " + remainingLetters + " left");
     if (remainingLetters === 0) {
         document.getElementById("win").innerHTML = wins++;
-        console.log("I have won");
+        // if(randomWord === "bacon")
+        // {
+        //     imageFunction();
+        // }
         audioW.play();
         reset();
     }
