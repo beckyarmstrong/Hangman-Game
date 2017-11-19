@@ -119,7 +119,7 @@ document.onkeyup=function(event) {
     // console.log(randomWord.length);
     if (randomWord.includes(userGuess)) {
         // console.log("test");
-// Step 7: if this statment is true, then modify the count variable, replace the dash in count with letter, and it has the correct position, and display the letter
+// Step 7: if this statment is true, then modify the count variable, replace the dash in count with letter, and it has the correct position, and display the letter.Also, if there are not more letters, give it a win, play audio and reset
     var guessIndex = randomWord.indexOf(userGuess);
     //console.log(randomWord.indexOf(userGuess));
     count[guessIndex] = userGuess
